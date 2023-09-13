@@ -23,6 +23,7 @@ java TopologicalSort <path_to_input_file>
 The input file should contain a list of vertices on the first line and directed edges on the subsequent lines.
 
 Example Input File:
+
 A B C D E
 
 A B
