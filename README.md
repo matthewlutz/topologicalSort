@@ -24,8 +24,7 @@ The input file should contain a list of vertices on the first line and directed 
 
 Example Input File:
 
-A B C D E
-
+A B C D E /n
 A B
 
 A C
