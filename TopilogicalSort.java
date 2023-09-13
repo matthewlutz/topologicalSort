@@ -42,7 +42,30 @@ public class TopologicalSort {
 
     public void addVertex(String s){
         //insert a new vertex so the vertex list remains sorted in ascending order
-
+        if(vertices.nextV == null){
+            VertexNode newVertex = new VertexNode(s, null);
+            vertices.nextV = newVertex;
+            numVertices ++;
+            return;
+        }
+        VertexNode current = vertices;
+        VertexNode previous = null;
+        while(current.nextV != null){
+            int compareResult = s.compareTo(current.name);
+            if(compareResult < 0){
+                VertexNode newVertex = new VertexNode(s, current);
+                previous.nextV = newVertex;
+                numVertices ++;
+                return;
+            }
+            previous = current;
+            current = current.nextV;
+            }
+        
+        VertexNode newVertex = new VertexNode(s, null);
+        previous.nextV = newVertex;
+        numVertices++;
+    }
 
     }
 
@@ -51,6 +74,45 @@ public class TopologicalSort {
         //PRE: the vertices n1 and n2 have already be added
         //insert the new edge so the edge list remains sorted in ascending order
 
+        VertexNode vertex1 = null;
+        VertexNode vertex2 = null;        
+        VertexNode current = vertices.nextV;
+
+        while (current != null){
+            if (current.name.equals(n1)){
+                VertexNode vertex1 = n1;
+            }else if (current.name.equals(n2)){
+                VertexNode vertex2 = n2;
+            }
+            if(vertex1 != null && vertex2 != null) {
+                break;
+            }
+            previous = current;
+            current = current.nextV;
+        }
+
+        //For testing
+        if (vertex1 == null || vertex2 == null) {
+            System.out.println("One or both vertices not found!");
+            return;
+        }        
+
+        EdgeNode currentEdge = vertex1.edge;
+        EdgeNode prevEdge = null;
+        while(currentedge != null && n2.compareTo(currentEdge.vertex2.name)){
+            prevEdge = currentEdge;
+            currentEdge = currentedge.nextE;
+            
+        }
+
+        //Insertion
+        EdgeNode newEdge = new EdgeNode(vertex1, vertex2, currentEdge);
+
+        if (prevEdge == null){
+            vertex1.edge = vertices;
+        }else{
+            prevEdge.nextE = newEdge;
+        }
 
     }
 
@@ -72,5 +134,33 @@ public class TopologicalSort {
 
         }
 
+    }
+
+
+    private int inDegree(VertexNode v){
+
+    }
+
+
+    //Tester
+    public static void main(String args[]) throws IOException{
+    //Simple Test Driver
+    //This driver assumes the input file is formatted correctly
+    BufferedReader b = new BufferedReader(new FileReader(args[0]));
+    TopologicalSort g = new TopologicalSort();
+    String line = b.readLine();
+    Scanner scan = new Scanner(line);
+    while (scan.hasNext()) {
+        g.addVertex(scan.next());
+    }
+    line = b.readLine();
+    while (line != null) {
+        scan = new Scanner(line);
+        g.addEdge(scan.next(), scan.next());
+        line = b.readLine();
+    }
+    g.printGraph();
+    System.out.println(“\nTopological Order\n”+g.topoSort());
+    
     }
 }
