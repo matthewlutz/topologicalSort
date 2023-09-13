@@ -23,14 +23,18 @@ java TopologicalSort <path_to_input_file>
 The input file should contain a list of vertices on the first line and directed edges on the subsequent lines.
 
 Example Input File:
-mathematica
-Copy code
 A B C D E
+
 A B
+
 A C
+
 B D
+
 C D
+
 D E
+
 Output
 The program will print the graph and then display the topological ordering of its vertices. If the graph contains a cycle (is not a DAG), it will indicate so.
 
