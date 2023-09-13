@@ -26,13 +26,9 @@ Example Input File:
 
 A B C D E /n
 A B
-
 A C
-
 B D
-
 C D
-
 D E
 
 Output
